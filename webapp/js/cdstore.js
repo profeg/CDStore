@@ -20,7 +20,7 @@
                 alert("AJAX filed!");
             });
 
-        this.addToCart = function(item){
+        $scope.addToCart = function(item){
             alert("Add to cart!\n " + item.name);
             cart[cart.length] = item;
         };
