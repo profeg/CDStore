@@ -1,5 +1,6 @@
 package com.test.rest;
 
+import com.test.dao.JdbcCdStoreDAO;
 import com.test.domain.CD;
 
 import javax.ws.rs.GET;
@@ -9,11 +10,12 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
-@Path("photo-spots")
+@Path("/store")
 @Produces("application/json")
 public class CdStoreResources {
     @GET
     public List<CD> getAllStore() {
-        return null;
+
+        return new JdbcCdStoreDAO().getCatalogue();
     }
 }

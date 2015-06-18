@@ -30,7 +30,7 @@
         <script type="text/javascript" src="js/page_main.js"></script>
     </div>
     <!--Catalogue page-->
-    <div class="page" ng-show="panel.isSelected(2)" ng-controller="StoreController as store">
+    <div class="page" ng-show="panel.isSelected(2)" ng-controller="StoreController">
             <select>
                 <option value="">Тип</option>
             </select>
@@ -38,7 +38,7 @@
                 <option value="">Жанр</option>
             </select>
             <table width="100%">
-                <tr ng-repeat="item in store.items">
+                <tr ng-repeat="item in items">
                     <form>
                     <td width="50%">
                         <input type="hidden" name="id" value="{{item.id}}">
@@ -47,7 +47,7 @@
                         <img src="pic/hot-icon.png" ng-show="item.hot"/>
                     </td>
                     <td><img ng-src="{{item.image}}"></td>
-                    <td><button ng-click="store.addToCart(item)">В корзину</button></td>
+                    <td><button ng-click="addToCart(item)">В корзину</button></td>
                     </form>
                 </tr>
             </table>
