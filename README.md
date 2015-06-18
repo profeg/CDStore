@@ -1,5 +1,6 @@
-##Run src/Launcher.java to start. Everything is preconfigured.
-##Try to use My CD Store at http://localhost:8080 .
+##Run src/Launcher.java to start. 
+##Then try to use My CD Store at 
+http://localhost:8080 .
 
 ###Tecnologies.
 ####Backend:
