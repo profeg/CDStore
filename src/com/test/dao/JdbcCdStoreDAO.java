@@ -17,14 +17,12 @@ import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
 public class JdbcCdStoreDAO implements CdStoreDAO {
 
-    private DataSource dataSource;
-    public void setDataSource(DataSource dataSource) {
-
+    public DataSource getDataSource() {
             Properties props = new Properties();
             FileInputStream fis = null;
             MysqlDataSource mysqlDS = null;
             try {
-                fis = new FileInputStream("db.properties");
+                fis = new FileInputStream("src/com/test/dao/db.properties");
                 props.load(fis);
                 mysqlDS = new MysqlDataSource();
                 mysqlDS.setURL(props.getProperty("MYSQL_DB_URL"));
@@ -33,7 +31,7 @@ public class JdbcCdStoreDAO implements CdStoreDAO {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        this.dataSource = mysqlDS;
+        return mysqlDS;
     }
 
     @Override
@@ -43,10 +41,10 @@ public class JdbcCdStoreDAO implements CdStoreDAO {
         List<CD> catalogue = new ArrayList<CD>();
 
         try {
-            conn = dataSource.getConnection();
+            conn = getDataSource().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery(sql);
-            if (rs.next()) {
+            while (rs.next()) {
                 catalogue.add(
                         new CD(
                                 rs.getInt("ID"),
