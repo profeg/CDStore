@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html ng-app="cdStore">
+<head lang="en">
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/cdstore.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/default.css">
+</head>
+<body>
+<!--MainContiner-->
+<div id="container" ng-controller="NaviPanelController as panel">
+    <!--Header-->
+    <div id="header"><h1 align="center">{{"My CD Store"}}</h1></div>
+    <!--Navigation Left Side-->
+    <div id="navi">
+        <ul>
+            <li ng-class="{active:panel.isSelected(1)}">
+                <a href ng-click="panel.selectTab(1)">Главная</a>
+            </li>
+            <li ng-class="{active:panel.isSelected(2)}">
+                <a href ng-click="panel.selectTab(2)">Каталог</a>
+            </li>
+            <li ng-class="{active:panel.isSelected(3)}">
+                <a href ng-click="panel.selectTab(3)">Корзина</a>
+            </li>
+        </ul>
+    </div>
+    <!--Main Page-->
+    <div class="page" ng-show="panel.isSelected(1)">
+        <script type="text/javascript" src="js/page_main.js"></script>
+    </div>
+    <!--Catalogue page-->
+    <div class="page" ng-show="panel.isSelected(2)" ng-controller="StoreController as store">
+            <select>
+                <option value="">Тип</option>
+            </select>
+            <select>
+                <option value="">Жанр</option>
+            </select>
+            <table width="100%">
+                <tr ng-repeat="item in store.items">
+                    <form>
+                    <td width="50%">
+                        <input type="hidden" name="id" value="{{item.id}}">
+                        <strong>{{item.name}}</strong><br>
+                        <em>{{item.type}}/{{item.style}}</em><br>
+                        <img src="pic/hot-icon.png" ng-show="item.hot"/>
+                    </td>
+                    <td><img ng-src="{{item.image}}"></td>
+                    <td><button ng-click="store.addToCart(item)">В корзину</button></td>
+                    </form>
+                </tr>
+            </table>
+    </div>
+    <!--Cart Page-->
+    <div class="page" ng-show="panel.isSelected(3)" ng-controller="CartCtrl as cart">
+        <table width="100%">
+            <tr ng-repeat="item in cart.items()">
+                <td width="50%">
+                    <input type="hidden" name="id" value="{{item.id}}">
+                    <strong>{{item.name}}</strong><br>
+                    <em>{{item.type}}/{{item.style}}</em><br>
+                    <img src="pic/hot-icon.png" ng-show="item.hot"/>
+                </td>
+                <td><img ng-src="{{item.image}}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
