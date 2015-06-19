@@ -36,5 +36,5 @@ a.menu_button {
     padding: .5em .5em;
     outline: none;
 }
-a.menu_button:hover { background: darkred; } /* при наведении курсора мышки */
-a.menu_button:active { background: white; } /* при нажатии */
+a.menu_button:hover { background: darkred; }
+a.menu_button:active { background: white; }
