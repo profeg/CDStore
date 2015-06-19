@@ -56,8 +56,6 @@
                 <option value="">Жанр</option>
             </select>
             <input type="search" ng-model="q" placeholder="Поиск по имени"><br>
-            <a href ng-click="prevPage()"> < Туда</a>
-
             <table width="100%">
                 <tr ng-repeat="item in items | filter: type.type | filter: style.style | filter:q as results">
                     <form>
