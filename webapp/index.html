@@ -49,6 +49,7 @@
     </div>
     <!--Catalogue page-->
     <div class="page" ng-show="panel.isSelected(2)"  ng-controller="storeController">
+        <hr>
             <select ng-model="type" ng-options="item.type for item in items | unique:'type'">
                 <option value="">Тип</option>
             </select>
@@ -56,6 +57,7 @@
                 <option value="">Жанр</option>
             </select>
             <input type="search" ng-model="q" placeholder="Поиск по имени"><br>
+        <hr>
             <table width="100%">
                 <tr ng-repeat="item in items | filter: type.type | filter: style.style | filter:q as results">
                     <form>
