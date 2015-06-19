@@ -27,3 +27,14 @@ body {
     padding-bottom: 10px;
     padding-right: 10px;
 }
+
+a.menu_button {
+    color: #fff;
+    text-decoration: none;
+    user-select: none;
+    background: red;
+    padding: .5em .5em;
+    outline: none;
+}
+a.menu_button:hover { background: darkred; } /* при наведении курсора мышки */
+a.menu_button:active { background: white; } /* при нажатии */
