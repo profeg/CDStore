@@ -51,8 +51,8 @@ public class JdbcCdStoreDAO implements CdStoreDAO {
                                 rs.getString("NAME"),
                                 rs.getString("TYPE"),
                                 rs.getString("STYLE"),
-                                rs.getString("IMAGE")
-
+                                rs.getString("IMAGE"),
+                                rs.getInt("HOT")
                         ));
             }
             ps.close();

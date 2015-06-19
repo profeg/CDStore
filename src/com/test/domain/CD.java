@@ -7,14 +7,23 @@ public class CD {
     private String type;
     private String style;
     private String image;
-    private Boolean hot;
+    private Integer hot;
 
-    public CD(int id, String name, String type, String style, String image) {
+    public CD(int id, String name, String type, String style, String image, Integer hot) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.style = style;
         this.image = image;
+        this.hot = hot;
+    }
+
+    public Integer getHot() {
+        return hot;
+    }
+
+    public void setHot(Integer hot) {
+        this.hot = hot;
     }
 
     public Integer getId() {
@@ -57,11 +66,4 @@ public class CD {
         this.image = image;
     }
 
-    public Boolean getHot() {
-        return hot;
-    }
-
-    public void setHot(Boolean hot) {
-        this.hot = hot;
-    }
 }

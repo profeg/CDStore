@@ -1,32 +1,49 @@
 (function() {
-    var cdStoreApp = angular.module('cdStore', []);
+    var cdStoreApp = angular.module('cdStore', ['angular.filter']);
 
     this.cart = [];
 
-    cdStoreApp.controller('CartCtrl', function(){
+    cdStoreApp.controller('headController', function($scope) {
+        $scope.stylePath = 'default.css';
+        $scope.changePath = function() {
+            if($scope.stylePath == 'alternate.css') $scope.stylePath = 'default.css';
+            else $scope.stylePath='alternate.css';
+        };
+    });
+
+    cdStoreApp.controller('cartCtrl', function(){
        this.items = function(){
            return cart;
        };
     });
 
-    cdStoreApp.controller('StoreController', function($scope,$http){
+    cdStoreApp.controller('storeController', function($scope,$http){
 
         $scope.items = [];
+
+        $scope.prevPage = function(){
+
+        };
+
+        $scope.nextPage = function(){
+
+        };
+
         $http.get('/rest/store').
-            success(function(data, status, headers, config) {
+            success(function(data) {
                 $scope.items = data;
             }).
-            error(function(data, status, headers, config) {
-                alert("AJAX filed!");
+            error(function() {
+                alert("AJAX failed!");
             });
 
         $scope.addToCart = function(item){
             alert("Add to cart!\n " + item.name);
-            cart[cart.length] = item;
+            cart.push(item);
         };
     });
 
-    cdStoreApp.controller('NaviPanelController', function(){
+    cdStoreApp.controller('naviPanelController', function(){
         this.tab = 1;
 
         this.selectTab = function(setTab){

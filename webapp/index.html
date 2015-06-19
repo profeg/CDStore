@@ -1,16 +1,21 @@
 <!DOCTYPE HTML>
-<html ng-app="cdStore">
+<html ng-app="cdStore" xmlns="http://www.w3.org/1999/html"  ng-controller="headController">
 <head lang="en">
+    <title>CD Store</title>
     <meta charset="UTF-8">
     <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/angular-filter.js"></script>
     <script type="text/javascript" src="js/cdstore.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/default.css">
+    <link rel="stylesheet" type="text/css" href="css/{{stylePath}}">
 </head>
 <body>
 <!--MainContiner-->
-<div id="container" ng-controller="NaviPanelController as panel">
+<div id="container" ng-controller="naviPanelController as panel">
     <!--Header-->
-    <div id="header"><h1 align="center">{{"My CD Store"}}</h1></div>
+    <div id="header">
+        <h1 align="center" ng-model="header">{{"My CD Store"}}</h1>
+        <button align="right" ng-click="changePath()">Change</button>
+    </div>
     <!--Navigation Left Side-->
     <div id="navi">
         <ul>
@@ -27,24 +32,40 @@
     </div>
     <!--Main Page-->
     <div class="page" ng-show="panel.isSelected(1)">
+
         <script type="text/javascript" src="js/page_main.js"></script>
+        <div id="topFive" ng-controller="storeController">
+            <hr>
+            <p align="center">Top HOT Five!</p>
+            <table>
+                <tr>
+                    <td ng-repeat="item in items | filterBy:['hot']:1 | limitTo:5">
+                        {{item.name}}<br>
+                        <img ng-src="{{item.image}}" height="100" width="100">
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
     <!--Catalogue page-->
-    <div class="page" ng-show="panel.isSelected(2)" ng-controller="StoreController">
-            <select>
+    <div class="page" ng-show="panel.isSelected(2)"  ng-controller="storeController">
+            <select ng-model="type" ng-options="item.type for item in items | unique:'type'">
                 <option value="">Тип</option>
             </select>
-            <select>
+            <select ng-model="style" ng-options="item.style for item in items | filter:type.type | unique:'style'">
                 <option value="">Жанр</option>
             </select>
+            <input type="search" ng-model="q" placeholder="Поиск по имени"><br>
+            <a href ng-click="prevPage()"> < Туда</a>
+
             <table width="100%">
-                <tr ng-repeat="item in items">
+                <tr ng-repeat="item in items | filter: type.type | filter: style.style | filter:q as results">
                     <form>
                     <td width="50%">
                         <input type="hidden" name="id" value="{{item.id}}">
                         <strong>{{item.name}}</strong><br>
                         <em>{{item.type}}/{{item.style}}</em><br>
-                        <img ng-src="pic/hot-icon.png" ng-show="item.hot"/>
+                        <img src="pic/hot-icon.png" ng-show="item.hot">
                     </td>
                     <td><img ng-src="{{item.image}}"></td>
                     <td><button ng-click="addToCart(item)">В корзину</button></td>
@@ -53,7 +74,7 @@
             </table>
     </div>
     <!--Cart Page-->
-    <div class="page" ng-show="panel.isSelected(3)" ng-controller="CartCtrl as cart">
+    <div class="page" ng-show="panel.isSelected(3)" ng-controller="cartCtrl as cart">
         <table width="100%">
             <tr ng-repeat="item in cart.items()">
                 <td width="50%">
