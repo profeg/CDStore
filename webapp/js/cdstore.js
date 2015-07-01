@@ -34,6 +34,9 @@
                 $scope.items = data;
             }).
             error(function() {
+
+                //If AJAX failed, we try to use static data
+                //this only for test purpose
                 $scope.items = [
                     {id:1,name:"Timoratus - Doom",type:"Audio",style:"Metall",image:"pic/aud1.jpg",hot:1},
                     {id:2,name:"Timoratus - Grind",type:"Audio",style:"Metall",image:"pic/aud2.jpg",hot:0},
